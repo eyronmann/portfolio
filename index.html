@@ -1,1 +1,536 @@
-<h1>My Portfolio</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>eyronmann — Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --accent: #c8f135;
+      --text: #e8e8e8;
+      --muted: #666666;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'EM';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      font-family: var(--font-display);
+      font-size: clamp(200px, 35vw, 420px);
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,241,53,0.07);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.85rem 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,241,53,0.25);
+    }
+
+    .scroll-line {
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 3rem;
+      line-height: 1;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 2;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p strong { color: var(--text); }
+
+    .skills-block { display: flex; flex-direction: column; gap: 1rem; }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .skill-row:hover { border-color: var(--accent); }
+
+    .skill-name {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .project-card {
+      background: var(--bg);
+      padding: 2rem;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-card:hover { background: var(--surface); }
+
+    .project-number {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .project-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex-grow: 1;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .project-lang {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(200,241,53,0.3);
+      padding: 0.25rem 0.6rem;
+    }
+
+    .project-link {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 560px;
+    }
+
+    .contact-inner p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .contact-item:hover { color: var(--accent); }
+
+    .contact-item span { color: var(--muted); font-size: 0.7rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    footer p {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 0 1.2rem 4rem; }
+      section { padding: 4rem 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">eyronmann</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-tag">Still Unknown</p>
+    <h1>Building random things<br>that <span>work.</span></h1>
+    <p class="hero-sub">
+      Still learning.
+      And building — one commit at a time.
+    </p>
+    <a href="#projects" class="hero-cta">View Projects →</a>
+    <div class="scroll-line">Scroll</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">// 01 — About</p>
+    <h2 class="section-title">Who I am</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I'm <strong>Eyron</strong>, a unknown based in <strong>Philippines</strong>.
+          I work with low-level and web technologies.
+        </p>
+        <p>
+          I'm currently building my skills and working on real projects.
+          I'm not the most experienced yet, but I ship things and I keep learning.
+        </p>
+        <p>
+          <!-- Add more about yourself here: school, goals, interests -->
+          Open to collaborations, internships, and interesting problems.
+        </p>
+      </div>
+      <div class="skills-block fade-in">
+        <div class="skill-row"><span class="skill-name">PHP</span><div class="skill-dot"></div></div>
+        <div class="skill-row"><span class="skill-name">HTML / CSS</span><div class="skill-dot"></div></div>
+        <div class="skill-row"><span class="skill-name">x86 Assembly</span><div class="skill-dot"></div></div>
+        <div class="skill-row"><span class="skill-name">Git / GitHub</span><div class="skill-dot"></div></div>
+        <!-- Add more skills as you learn them -->
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">// 02 — Projects</p>
+    <h2 class="section-title">What I've built</h2>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <span class="project-number">001</span>
+        <div class="project-name">RMSS</div>
+        <p class="project-desc">
+          A record management system built in PHP.
+          <!-- Add more detail: what does it manage? who is it for? -->
+        </p>
+        <div class="project-footer">
+          <span class="project-lang">PHP</span>
+          <a href="https://github.com/eyronmann/RMSS" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-number">002</span>
+        <div class="project-name">RMS-RMS</div>
+        <p class="project-desc">
+          <!-- Describe this project -->
+          Add a short description of what this project does.
+        </p>
+        <div class="project-footer">
+          <span class="project-lang">—</span>
+          <a href="https://github.com/eyronmann/RMS-RMS" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-number">003</span>
+        <div class="project-name">Stopwatch — emu8086</div>
+        <p class="project-desc">
+          A functional stopwatch written in x86 Assembly, running on the emu8086 emulator.
+          A low-level project that demonstrates direct hardware interaction.
+        </p>
+        <div class="project-footer">
+          <span class="project-lang">Assembly</span>
+          <a href="https://github.com/eyronmann/Stopwatch-in-emu8086" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">// 03 — Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <div class="contact-inner fade-in">
+      <p>
+        I'm open to internships, collaborations, or just talking about code.
+        Reach out through any of the links below.
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/eyronmann" class="contact-item" target="_blank">
+          GitHub
+          <span>github.com/eyronmann →</span>
+        </a>
+        <a href="mailto:aroncadeliniamirna@gmail.com" class="contact-item">
+          Email
+          <span>aroncadeliniamirna@gmail.com →</span>
+        </a>
+        <a href="https://www.linkedin.com/in/aron-cadelina-mirna/" class="contact-item" target="_blank">
+          LinkedIn
+          <span>linkedin.com/in/aron-cadelinia-mirano →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 eyronmann</p>
+    <a href="https://github.com/eyronmann" target="_blank">github.com/eyronmann</a>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
